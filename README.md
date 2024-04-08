@@ -2,6 +2,7 @@
 <p align="center">
   <img src="https://github.com/vocdex/vocdex.github.io/blob/master/assets/img/icon.png" width="150" title="hover text">
 </p>
+This repository is archived as of April 2024. 
 
 # DIGIT
 This codebase allows you:
