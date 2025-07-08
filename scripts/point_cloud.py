@@ -6,20 +6,20 @@ from digit_depth.third_party import geom_utils
 from digit_depth.digit import DigitSensor
 from digit_depth.train import MLP
 from digit_depth.train.prepost_mlp import *
-from attrdict import AttrDict
+# from attrdict import AttrDict
 from digit_depth.third_party import vis_utils
 from digit_depth.handlers import find_recent_model, find_background_img
 seed = 42
 torch.seed = seed
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-base_path = Path(__file__).parent.parent.parent.resolve()
+base_path = Path(__file__).parent.parent.resolve()
 
 
 @hydra.main(config_path=f"{base_path}/config", config_name="digit.yaml", version_base=None)
 def show_point_cloud(cfg):
     # view_params = AttrDict({'fov': 60, 'front': [-0.1, 0.1, 0.1], 'lookat': [
     #     -0.001, -0.01, 0.01], 'up': [0.04, -0.05, 0.190], 'zoom': 2.5})
-    view_params = AttrDict({
+    view_params = dict({
                 "fov": 60,
                 "front": [-0.3, 0.0, 0.5],
                 "lookat": [-0.001, 0.001,-0.001],

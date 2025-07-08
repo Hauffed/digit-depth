@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import open3d as o3d
 import torch
-from attrdict import AttrDict
 from matplotlib.patches import Circle, Rectangle
 from queue import Empty
 
@@ -29,7 +28,7 @@ class Visualizer3d:
 
         self.base_path = base_path
 
-        self.view_params = AttrDict(
+        self.view_params = dict(
             {
                 "fov": 0,
                 "front": [0.0, 0.0, 0.0],
@@ -130,11 +129,11 @@ class Visualizer3d:
 
     def set_view(self):
         ctr = self.vis.get_view_control()
-        ctr.change_field_of_view(self.view_params.fov)
-        ctr.set_front(self.view_params.front)
-        ctr.set_lookat(self.view_params.lookat)
-        ctr.set_up(self.view_params.up)
-        ctr.set_zoom(self.view_params.zoom)
+        ctr.change_field_of_view(self.view_params["fov"])
+        ctr.set_front(self.view_params["front"])
+        ctr.set_lookat(self.view_params["lookat"])
+        ctr.set_up(self.view_params["up"])
+        ctr.set_zoom(self.view_params["zoom"])
 
     def set_view_cam(self, T):
         ctr = self.vis.get_view_control()
