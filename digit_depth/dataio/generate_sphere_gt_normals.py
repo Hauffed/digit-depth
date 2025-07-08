@@ -28,16 +28,19 @@ def generate_sphere_gt_normals(img_mask, center_x, center_y, radius):
 
             if np.sum(img_mask[y, x, :]) > 0:
                 dist = np.sqrt((x - center_x) ** 2 + (y - center_y) ** 2)
-                ang_xz = math.acos(dist / radius)
-                ang_xy = math.atan2(y - center_y, x - center_x)
+                
+                # Check if point is within sphere radius to avoid domain error
+                if dist <= radius:
+                    ang_xz = math.acos(dist / radius)
+                    ang_xy = math.atan2(y - center_y, x - center_x)
 
-                nx = math.cos(ang_xz) * math.cos(ang_xy)
-                ny = math.cos(ang_xz) * math.sin(ang_xy)
-                nz = math.sin(ang_xz)
+                    nx = math.cos(ang_xz) * math.cos(ang_xy)
+                    ny = math.cos(ang_xz) * math.sin(ang_xy)
+                    nz = math.sin(ang_xz)
 
-                img_normal[y, x, 0] = nx
-                img_normal[y, x, 1] = -ny
-                img_normal[y, x, 2] = nz
+                    img_normal[y, x, 0] = nx
+                    img_normal[y, x, 1] = -ny
+                    img_normal[y, x, 2] = nz
 
             norm_val = np.linalg.norm(img_normal[y, x, :])
             img_normal[y, x, :] = img_normal[y, x, :] / norm_val
