@@ -31,7 +31,7 @@ def show_point_cloud(cfg):
     # projection params
     proj_mat = torch.tensor(cfg.sensor.P)
     model_path = find_recent_model(f"{base_path}/models")
-    model = torch.load(model_path).to(device)
+    model = torch.load(model_path, weights_only=False).to(device)
     model.eval()
     # base image depth map
     background_img_path = find_background_img(base_path)
