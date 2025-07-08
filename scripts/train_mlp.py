@@ -64,7 +64,7 @@ def train(train_loader, epochs, lr):
 
 def test(test_loader,criterion):
     most_recent_model = find_recent_model(f"{base_path}/models")
-    model = torch.load(most_recent_model).to(device)
+    model = torch.load(most_recent_model, weights_only=False).to(device)
     model.eval()
     wandb.init(project="MLP", name="Color 2 Normal model test")
     wandb.watch(model, log_freq=100)
